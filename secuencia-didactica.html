@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secuencia Didáctica — UT Ciudad Juárez · 3er Cuatrimestre · Desarrollo Web</title>
+<style>
+  :root{
+    --ink:#1a2233; --muted:#5a6478; --accent:#0f5e8c; --accent2:#b3541e;
+    --line:#c9d2e0; --bg:#f4f6f9; --chip:#e8eef5;
+  }
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);
+       font-size:12.5px;line-height:1.5;background:#fff;margin:0}
+  .page{max-width:900px;margin:0 auto;padding:32px 40px}
+  h1{font-size:24px;color:var(--accent);margin:0 0 4px;letter-spacing:-.5px}
+  h2{font-size:17px;color:var(--accent);border-bottom:2px solid var(--accent);
+     padding-bottom:4px;margin-top:36px;page-break-after:avoid}
+  h3{font-size:14px;color:var(--accent2);margin:22px 0 8px;page-break-after:avoid}
+  h4{font-size:12.5px;margin:14px 0 4px;page-break-after:avoid}
+  p{margin:6px 0}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11.5px;page-break-inside:auto}
+  th{background:var(--chip);text-align:left;padding:6px 8px;border:1px solid var(--line)}
+  td{padding:6px 8px;border:1px solid var(--line);vertical-align:top}
+  tr{page-break-inside:avoid}
+  thead{display:table-header-group}
+  ul,ol{margin:6px 0;padding-left:22px}
+  li{margin:2px 0}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;background:#eef1f5;
+       padding:1px 4px;border-radius:3px;font-size:11px}
+  .meta{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:14px 0}
+  .meta table td{border:none;background:transparent;padding:2px 6px 2px 0}
+  .box{border:1px solid var(--line);border-left:4px solid var(--accent);
+       border-radius:6px;padding:10px 14px;margin:12px 0;background:#fbfcfe;
+       page-break-inside:avoid}
+  .box.warn{border-left-color:var(--accent2)}
+  .chip{display:inline-block;background:var(--chip);border:1px solid var(--line);
+        border-radius:20px;padding:1px 10px;font-size:10.5px;margin:2px 3px 2px 0}
+  .session{border:1px solid var(--line);border-radius:8px;margin:14px 0;page-break-inside:auto;overflow:hidden}
+  .session-head{background:var(--chip);padding:8px 14px;border-bottom:1px solid var(--line);
+                display:flex;justify-content:space-between;align-items:baseline}
+  .session-head .t{font-weight:700;color:var(--accent);font-size:13.5px}
+  .session-head .dur{font-size:11px;color:var(--muted);white-space:nowrap}
+  .session-body{padding:10px 14px}
+  .timeline{width:100%;border:1px dashed var(--line);border-radius:6px;font-size:11.5px}
+  .timeline td{border:none;border-bottom:1px dotted var(--line);padding:4px 8px}
+  .timeline td:first-child{white-space:nowrap;font-weight:600;color:var(--accent);width:70px}
+  .timeline tr:last-child td{border-bottom:none}
+  .rubrica{font-size:10.5px}
+  .rubrica th{font-size:10.5px}
+  .footer-note{margin-top:30px;font-size:10.5px;color:var(--muted);text-align:center;
+               border-top:1px solid var(--line);padding-top:10px}
+  .minuta{border:2px solid var(--accent);border-radius:8px;padding:14px 18px;margin:12px 0;
+          page-break-inside:avoid;background:#fff}
+  .minuta h4{color:var(--accent);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+  .minuta .firma{display:flex;justify-content:space-between;margin-top:22px;font-size:11px}
+  .firma div{text-align:center;flex:1}
+  .firma .linea{border-top:1px solid var(--ink);margin:0 10px;padding-top:4px}
+  .pb{page-break-before:always}
+  @media print{
+    body{background:#fff;font-size:11.5px}
+    .page{padding:10mm 8mm;max-width:100%}
+    .session,.box,.minuta{page-break-inside:auto}
+    a{color:var(--ink);text-decoration:none}
+  }
+  @media screen and (max-width:720px){.page{padding:18px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ======================= PORTADA / DATOS ======================= -->
+<h1>Secuencia Didáctica · Desarrollo Web con IA</h1>
+<p style="color:var(--muted);font-size:13px;margin-top:0">
+  Universidad Tecnológica de Ciudad Juárez · {Carrera: Ingeniería en Tecnologías de la Información / Desarrollo de Software}
+  · 3er Cuatrimestre · Grupo: ______ · Docente: ______ · Ciclo: ______</p>
+
+<div class="meta">
+  <table>
+    <tr><td><b>Unidad didáctica</b></td><td>Construcción de una aplicación web real: sitio profesional de asesorías con asistente de IA, ruta de WhatsApp y pruebas automáticas (caso de estudio: sitio de Laura, asesorías de artículos científicos).</td></tr>
+    <tr><td><b>Duración</b></td><td>8 sesiones de 120–150 min (≈ 16–20 hrs). Cada sesión entrega una evidencia con rúbrica SEET.</td></tr>
+    <tr><td><b>Enfoque</b></td><td>Clases guiadas: CodeAlong del maestro → práctica en parejas (maestro-alumno) → reto individual → entrega de evidencia.</td></tr>
+    <tr><td><b>Gamificación</b></td><td>XP por evidencias, "jefes finales" semanales y Demo Day. Los puntos se registran en la bitácora del grupo.</td></tr>
+    <tr><td><b>Competencias</b></td><td>• Diseñar interfaces web con HTML5 semántico y CSS moderno (Flexbox/Grid, variables, responsive).<br>
+      • Programar lógica en JavaScript moderno (ES6+, DOM, asincronía).<br>
+      • Tipar y estructurar proyectos con TypeScript y npm/bun + Git.<br>
+      • Construir interfaces reactivas con React (componentes, props, estado, hooks) y Radix/shadcn + Tailwind.<br>
+      • Integrar datos: rutas, API REST, validación con esquemas.<br>
+      • Consumir IA generativa (chatbot con API) y probar código con Vitest.<br>
+      • Documentar, versionar y desplegar proyectos.</td></tr>
+    <tr><td><b>Evidencia central</b></td><td>E8 — Mini SaaS propio: el alumno replica la arquitectura del sitio (landing + chatbot propio + ruta de contacto + pruebas), con datos reales de un negocio local. Esta es la evidencia integradora del cuatrimestre.</td></tr>
+  </table>
+</div>
+
+<div class="box">
+  <b>¿Por qué este contenido es "actual y retador"?</b> Los alumnos construyen una aplicación que <i>existe y está en producción</i>:
+el asistente de IA del sitio responde solo con información confirmada, genera un resumen de la consulta y lo envía por WhatsApp.
+Cada sesión introduce una pieza real de esa app (HTML → CSS → JS → TS → React → API → IA → pruebas → deploy),
+por lo que el aprendizaje es incremental, verificable y con propósito: un producto, no ejercicios sueltos.
+</div>
+
+<!-- ======================= SESIONES ======================= -->
+<h2>1. Plan de las 8 sesiones (120–150 min c/u)</h2>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 1 · HTML5 semántico + CSS moderno · La base del sitio</span><span class="dur">130 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> Maquetar una landing page accesible y responsive con HTML semántico y CSS (variables, Flexbox, Grid, media queries).
+    <b>Reto:</b> "Landing page de Laura" — secciones: hero, servicios, artículos científicos, contacto (WhatsApp), footer.
+    <table class="timeline">
+      <tr><td>0–10</td><td>Inicio: bitácora XP, repaso de retos anteriores, " ¿Qué haría un buen landing de asesorías?" (lluvia de ideas).</td></tr>
+      <tr><td>10–35</td><td>CodeAlong maestro: estructura HTML5 semántica (&lt;header&gt;, &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;nav&gt;, &lt;footer&gt;, aria-labels) inspeccionando la página real del sitio.</td></tr>
+      <tr><td>35–70</td><td>CodeAlong CSS: variables CSS, Flexbox/Grid, hover states, media queries responsive (móvil primero).</td></tr>
+      <tr><td>70–105</td><td>Práctica maestro-alumno: parejas replican la landing en VS Code, rota el "driver/navigator" cada 10 min. Desafío extra: modo oscuro con variables.</td></tr>
+      <tr><td>105–125</td><td>Reto individual (15 min): maquetar sección "Artículos científicos" con tarjetas responsive sin copiar.</td></tr>
+      <tr><td>125–130</td><td>Cierre: entrega E1 + retroalimentación rápida (2 estrellas, 1 mejora).</td></tr>
+    </table>
+    <b>Evidencia E1:</b> Landing page HTML+CSS responsive (archivo único o carpeta), subida a GitHub Pages/Replit/Netlify Drop. <b>XP: 100</b>
+  </div>
+</div>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 2 · JavaScript moderno · El cerebro del orientador</span><span class="dur">140 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> ES6+: arrow functions, destructuring, spread, template literals, arrays/objetos, DOM, eventos, asincronía (promesas, async/await, fetch).
+    <b>Reto:</b> "Mini orientador" — script que simula el chat: responde con datos confirmados y arma un resumen de la consulta (igual que <code>orientador.server.ts</code> lo hace en producción).
+    <table class="timeline">
+      <tr><td>0–15</td><td>Inicio: Kahoot/quiz relámpago (10 preguntas JS). Bitácora XP.</td></tr>
+      <tr><td>15–50</td><td>CodeAlong: datos confirmados como array de constantes (ver <code>asesorias-info.ts</code>), funciones puras, template literals, manejo del DOM (input + botón + lista de mensajes).</td></tr>
+      <tr><td>50–80</td><td>CodeAlong: asincronía — <code>fetch</code> a una API pública (ej. API de país o placeholder), async/await, manejo de errores.</td></tr>
+      <tr><td>80–115</td><td>Práctica maestro-alumno en trios: construyen el mini chat. Roles: 1 escribe, 1 revisa con rúbrica de "código limpio", 1 documenta decisiones.</td></tr>
+      <tr><td>115–135</td><td>Reto individual: agregar validación (si el input está vacío, alerta amigable) y un botón "Limpiar chat".</td></tr>
+      <tr><td>135–140</td><td>Cierre: demo de 2 parejas + entrega E2.</td></tr>
+    </table>
+    <b>Evidencia E2:</b> Mini chat JS funcional + captura de consola limpia + URL pública. <b>XP: 150</b>
+  </div>
+</div>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 3 · Git + Node/bun + estructura profesional · El taller del dev</span><span class="dur">130 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> Git/GitHub (init, commit, push, ramas), gestores de paquetes (npm/bun), <code>package.json</code>, scripts (<code>dev</code>, <code>build</code>), estructura de carpetas <code>src/</code>, linters.
+    <b>Reto:</b> "Fork &amp; Fix" — cada alumno clona un repo con errores intencionales y lo deja verde.
+    <table class="timeline">
+      <tr><td>0–15</td><td>Inicio: reto sorpresa — el maestro rompe algo en pantalla y los alumnos diagnostican (git status/log).</td></tr>
+      <tr><td>15–50</td><td>CodeAlong: <code>git init/add/commit/push</code>, <code>.gitignore</code>, repo en GitHub, GitHub Pages. Luego <code>npm init</code>/<code>bun init</code>, instalar dependencias (<code>vite</code>, <code>typescript</code>), scripts en package.json.</td></tr>
+      <tr><td>50–80</td><td>CodeAlong: <code>vite</code> dev server, entrada <code>index.html</code> → <code>src/main.ts(x)</code>, primera pantalla renderizada.</td></tr>
+      <tr><td>80–115</td><td>Práctica maestro-alumno: parejas clonan el "repo roto" del maestro (5 bugs marcados con TODO), cada uno resuelve 1–2 y hace PR con descripción.</td></tr>
+      <tr><td>115–125</td><td>Mini-reto: crear su propio repo del proyecto del cuatrimestre ("Sitio [Negocio]").</td></tr>
+      <tr><td>125–130</td><td>Cierre: entrega E3 (link al repo con historial de commits).</td></tr>
+    </table>
+    <b>Evidencia E3:</b> Repo propio en GitHub con ≥5 commits, <code>package.json</code> y README con instrucciones de instalación. <b>XP: 150</b>
+  </div>
+</div>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 4 · TypeScript · Tipos que salvan vidas</span><span class="dur">140 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> Tipos primitivos, interfaces, type aliases, union types, generics básicos, <code>strict</code> mode, inferencia, errores de compilación como guía.
+    <b>Reto:</b> "TS Challenge" — el código JS de la sesión 2 se migra a TS; el compilador "castiga" los errores.
+    <table class="timeline">
+      <tr><td>0–15</td><td>Inicio: comparación en vivo — mismo código en JS vs TS (el TS "detecta" bugs antes de correr).</td></tr>
+      <tr><td>15–55</td><td>CodeAlong: <code>tsconfig.json</code> strict, interfaces para <code>Mensaje</code>, <code>Usuario</code>, <code>ResumenConsulta</code> (ver <code>resumen.ts</code>); tipos para props y funciones.</td></tr>
+      <tr><td>55–80</td><td>CodeAlong: generics simples (<code>Array&lt;T&gt;</code>, función <code>fetchJson&lt;T&gt;</code>), union types, optional chaining.</td></tr>
+      <tr><td>80–115</td><td>Práctica maestro-alumno: migración guiada del mini chat a TS. Reto oculto: función con error de tipo que debe descubrirse vía compilador.</td></tr>
+      <tr><td>115–135</td><td>Reto individual: tipar el objeto "negocio" de su proyecto (nombre, WhatsApp, servicios, horarios...).</td></tr>
+      <tr><td>135–140</td><td>Cierre: entrega E4 (repo con código TS compilando sin errores, <code>tsc --noEmit</code> en verde).</td></tr>
+    </table>
+    <b>Evidencia E4:</b> Código TS migrado + captura de compilación exitosa + 3 interfaces propias documentadas. <b>XP: 150</b>
+  </div>
+</div>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 5 · React I · Componentes, props y estado · La UI cobra vida</span><span class="dur">150 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> JSX, componentes funcionales, props, <code>useState</code>, <code>useEffect</code>, listas con <code>.map()</code> + keys, formularios controlados.
+    <b>Reto:</b> Convertir la landing de HTML en componentes React reutilizables (Header, Hero, CardServicio, Footer... como en <code>src/components</code> del sitio real).
+    <table class="timeline">
+      <tr><td>0–15</td><td>Inicio: "¿Por qué React?" — render declarativo vs manipular DOM a mano. Mini demo del sitio real.</td></tr>
+      <tr><td>15–55</td><td>CodeAlong: crear app React (Vite), JSX, primer componente, props tipadas con TS, composición.</td></tr>
+      <tr><td>55–85</td><td>CodeAlong: <code>useState</code> (contador → tema claro/oscuro), <code>useEffect</code> (localStorage, fetch), listas dinámicas, formulario controlado de "contacto".</td></tr>
+      <tr><td>85–125</td><td>Práctica maestro-alumno: trios convierten la landing E1 en componentes React. Cada uno es "dueño" de 2 componentes; deben integrarlos.</td></tr>
+      <tr><td>125–145</td><td>Reto individual: agregar un componente <code>ContadorXP</code> interactivo (sumar puntos por actividad).</td></tr>
+      <tr><td>145–150</td><td>Cierre: entrega E5.</td></tr>
+    </table>
+    <b>Evidencia E5:</b> App React con ≥6 componentes propios, estado interactivo y deploy. <b>XP: 200</b>
+  </div>
+</div>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 6 · React II + Radix/shadcn + Tailwind · UI profesional y accesible</span><span class="dur">140 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> Tailwind utility-first, diseño responsive, shadcn/ui (componentes sobre Radix), accesibilidad (roles, focus, aria), diseño de sistemas.
+    <b>Reto:</b> "Skins challenge" — el mismo componente con 3 temas visuales (claro/oscuro/neón).
+    <table class="timeline">
+      <tr><td>0–15</td><td>Inicio: inspección del sitio real — "¿de dónde salen estos componentes tan bonitos?" (shadcn/Radix).</td></tr>
+      <tr><td>15–50</td><td>CodeAlong: instalar Tailwind, utilities, breakpoints, custom config; agregar shadcn components (button, card, dialog, accordion) y analizar un componente Radix por dentro.</td></tr>
+      <tr><td>50–75</td><td>CodeAlong: accesibilidad práctica — focus visible, aria-labels, navegación por teclado, contraste; mobile-first responsive.</td></tr>
+      <tr><td>75–110</td><td>Práctica maestro-alumno: parejas rediseñan su landing React con Tailwind + 3 componentes shadcn; evaluan accesibilidad con Lighthouse.</td></tr>
+      <tr><td>110–135</td><td>Reto individual: modal de "Solicitar asesoría" con Dialog de Radix + validación visual.</td></tr>
+      <tr><td>135–140</td><td>Cierre: entrega E6 (deploy con score Lighthouse ≥90).</td></tr>
+    </table>
+    <b>Evidencia E6:</b> UI rediseñada responsive + captura Lighthouse + evidencia de navegación por teclado. <b>XP: 200</b>
+  </div>
+</div>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 7 · Datos y API · Enrutado, fetch y validación · El orientador se conecta</span><span class="dur">140 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> React Router / TanStack Router, consumo de API REST, esquemas de validación (zod), manejo de loading/error states, server functions (concepto client vs server).
+    <b>Reto:</b> "Consumo real" — conectar la UI a datos externos (JSON propio, JSONPlaceholder, o API pública) con estados de carga.
+    <table class="timeline">
+      <tr><td>0–15</td><td>Inicio: ¿cliente o servidor? Mini-diagrama del flujo del orientador real (browser → /api/orientador → gateway).</td></tr>
+      <tr><td>15–50</td><td>CodeAlong: rutas (/ , /servicios, /contacto) con router, layout compartido, rutas 404; fetch con loading/error/empty states.</td></tr>
+      <tr><td>50–80</td><td>CodeAlong: validación con zod (validar payload de contacto y respuesta de API), funciones de utilidad puras, manejo de errores amigables.</td></tr>
+      <tr><td>80–115</td><td>Práctica maestro-alumno: trios conectan su app a un "backend simulado" (archivo JSON o API pública). Deben implementar estados de carga y error reales.</td></tr>
+      <tr><td>115–135</td><td>Reto individual: formulario "Solicitar asesoría" que valida con zod y simula envío (fetch a jsonplaceholder.typicode.com o endpoint propio).</td></tr>
+      <tr><td>135–140</td><td>Cierre: entrega E7.</td></tr>
+    </table>
+    <b>Evidencia E7:</b> App con ≥3 rutas, datos dinámicos, validación zod y manejo de errores. <b>XP: 200</b>
+  </div>
+</div>
+
+<div class="session">
+  <div class="session-head"><span class="t">Sesión 8 · IA generativa + pruebas + deploy · Demo Day · Tu mini SaaS</span><span class="dur">150 min</span></div>
+  <div class="session-body">
+    <b>Aprendizaje esperado:</b> Consumo de IA generativa (chat streaming, prompts de sistema, límites y guardrails), pruebas unitarias con Vitest, despliegue y documentación.
+    <b>Reto final:</b> "Demo Day" — cada alumno presenta su mini aplicación completa (landing + asistente IA + WhatsApp + pruebas) en 5 min.
+    <table class="timeline">
+      <tr><td>0–20</td><td>Inicio: análisis del <code>orientador.server.ts</code> real: system prompt, "solo datos confirmados", streaming, resumen estructurado. Discusión: ¿qué pasa si la IA inventa un precio?</td></tr>
+      <tr><td>20–55</td><td>CodeAlong: integrar un chatbot con API (Lovable AI Gateway vía backend del curso, o Gemini/OpenAI free tier). Prompt de sistema con "datos confirmados" + fallback a WhatsApp.</td></tr>
+      <tr><td>55–80</td><td>CodeAlong: Vitest — pruebas unitarias de funciones puras (builders de links, validaciones, transformadores), igual que <code>whatsapp.test.ts</code>/<code>resumen.test.ts</code> del sitio real. <code>npm test</code>.</td></tr>
+      <tr><td>80–115</td><td>Práctica maestro-alumno + integración: parejas unen frontend+chatbot+whatsapp; escriben 3 pruebas unitarias que pasen.</td></tr>
+      <tr><td>115–140</td><td>Deploy final (Vercel/Netlify/Lovable) + README con capturas + bitácora de aprendizajes.</td></tr>
+      <tr><td>140–150</td><td><b>Demo Day:</b> 5 min por equipo (demo + 2 min defensa con rúbrica). Entrega E8 + retro final.</td></tr>
+    </table>
+    <b>Evidencia E8 (integradora):</b> Mini aplicación desplegada: landing + chatbot IA restringido a datos confirmados + botón WhatsApp + pruebas unitarias + repo público. <b>XP: 300 (jefe final)</b>
+  </div>
+</div>
+
+<!-- ======================= MINUTAS ======================= -->
+<h2 class="pb" style="page-break-before:always">2. Minutas de inicio de evidencias</h2>
+<p>Usar una por evidencia. El docente la llena en los primeros 10–15 min de la sesión correspondiente.
+Se imprime y se archiva como evidencia del proceso de enseñanza (SEET).</p>
+
+<div class="minuta">
+  <h4>Minuta de inicio de evidencia — E__ · Sesión __</h4>
+  <p><b>Fecha:</b> ____/____/______ &nbsp; <b>Hora:</b> ______ &nbsp; <b>Docente:</b> ____________________ &nbsp; <b>Grupo:</b> ______</p>
+  <table>
+    <tr><th style="width:30%">Evidencia</th><td>E__: ________________________________________________</td></tr>
+    <tr><th>Competencia</th><td>____________________________________________________________</td></tr>
+    <tr><th>Producto esperado</th><td>____________________________________________________________</td></tr>
+    <tr><th>Criterios de la rúbrica</th><td>□ Funcional &nbsp; □ Técnico &nbsp; □ Calidad/UX &nbsp; □ Entrega/Documentación &nbsp; □ Innovación</td></tr>
+    <tr><th>Instrucciones dadas en clase</th><td><br><br></td></tr>
+    <tr><th>Dudas aclaradas</th><td><br><br></td></tr>
+    <tr><th>Alumnos presentes</th><td>N° presentes: ______ &nbsp; N° ausentes: ______ (lista en lista de asistencia)</td></tr>
+  </table>
+  <div class="firma">
+    <div><div class="linea">Firma del docente</div></div>
+    <div><div class="linea">Vo. Bo. Coordinación</div></div>
+  </div>
+</div>
+
+<div class="minuta">
+  <h4>Minuta de arranque — "Kick-off de sesión" (usar cada clase, 5 min)</h4>
+  <p><b>Fecha:</b> ____/____/______ &nbsp; <b>Sesión:</b> __ &nbsp; <b>Tema:</b> ______________________________</p>
+  <table>
+    <tr><th style="width:35%">Agenda anunciada</th><td>Inicio/quiz → CodeAlong → Práctica en equipo → Reto → Entrega evidencia</td></tr>
+    <tr><th>XP acumulada al inicio</th><td>______ pts &nbsp;·&nbsp; Nivel: ________________________</td></tr>
+    <tr><th>Reto de la semana</th><td>____________________________________________________________</td></tr>
+    <tr><th>Materiales/recursos</th><td>Repo del curso: __________ &nbsp; · &nbsp; Enlaces: __________</td></tr>
+    <tr><th>Observaciones del docente</th><td><br><br></td></tr>
+  </table>
+  <div class="firma">
+    <div><div class="linea">Docente</div></div>
+    <div><div class="linea">Rep. de grupo</div></div>
+  </div>
+</div>
+
+<!-- ======================= RUBRICAS ======================= -->
+<h2>3. Rúbricas (SEET)</h2>
+<p>Escala: <b>4 = Sobresaliente</b> · <b>3 = Satisfactorio</b> · <b>2 = En desarrollo</b> · <b>1 = Insuficiente</b> · <b>0 = No entregado</b>.
+Calificación = promedio ponderado × 10. Se firma con el alumno al momento de la entrega.</p>
+
+<h3>Rúbrica general por evidencia (aplica a E1–E8)</h3>
+<table class="rubrica">
+  <tr><th style="width:4%">#</th><th style="width:24%">Criterio</th><th style="width:18%">Peso</th><th>Indicadores (4 / 3 / 2 / 1)</th></tr>
+  <tr><td>1</td><td>Cumplimiento funcional</td><td>35%</td><td>La app hace todo lo pedido, sin errores en flujo principal / hace lo esencial con detalles menores / cumple parcialmente / no cumple lo central.</td></tr>
+  <tr><td>2</td><td>Calidad técnica</td><td>25%</td><td>Código limpio, legible, organizado en archivos, sin errores de consola ni de compilación / ordenado con detalles menores / funciona pero desordenado / errores graves.</td></tr>
+  <tr><td>3</td><td>Diseño y UX</td><td>20%</td><td>Responsive, accesible (teclado/aria), coherente visualmente / responsive con detalles / estático y rígido / sin cuidado visual.</td></tr>
+  <tr><td>4</td><td>Entrega y documentación</td><td>10%</td><td>URL pública + repo + README completo + commits descriptivos / entregado con README básico / incompleto / solo código.</td></tr>
+  <tr><td>5</td><td>Innovación y esfuerzo</td><td>10%</td><td>Reto extra resuelto o función creativa propia / intento de extra sin completar / lo mínimo pedido / copia sin adaptar.</td></tr>
+</table>
+
+<h3>Rúbrica específica — E8 (evidencia integradora, "Mini SaaS")</h3>
+<table class="rubrica">
+  <tr><th style="width:4%">#</th><th>Criterio</th><th>Indicadores</th></tr>
+  <tr><td>1</td><td><b>Chatbot con guardrails (25%)</b></td><td>El asistente responde solo con datos confirmados del negocio, admite lo que no sabe y deriva a WhatsApp / responde pero puede inventar datos / chat básico sin restricciones / sin chatbot.</td></tr>
+  <tr><td>2</td><td><b>Arquitectura (20%)</b></td><td>Separación clara de datos/servicios/componentes, código TS tipado, configuración ordenada / algo de estructura / un solo archivo gigante / sin estructura.</td></tr>
+  <tr><td>3</td><td><b>Interfaz (20%)</b></td><td>Responsive, accesible, Tailwind/shadcn consistente con la marca del negocio / responsive / estática / descuidada.</td></tr>
+  <tr><td>4</td><td><b>Pruebas (15%)</b></td><td>≥3 pruebas unitarias significativas que pasan (<code>npm test</code>) / pruebas triviales / pruebas que fallan / sin pruebas.</td></tr>
+  <tr><td>5</td><td><b>Integración WhatsApp (10%)</b></td><td>Enlace wa.me con mensaje prellenado correcto / enlace wa.me genérico / solo número visible / ausente.</td></tr>
+  <tr><td>6</td><td><b>Despliegue + Demo (10%)</b></td><td>URL pública funcional + defensa clara de decisiones técnicas / URL funcional / solo local / no funciona.</td></tr>
+</table>
+
+<h3>Rúbrica de proceso — "Maestro-alumno" (se evalúa por sesión, aporta 20% del parcial)</h3>
+<table class="rubrica">
+  <tr><th>Criterio</th><th>4</th><th>3</th><th>2</th><th>1</th></tr>
+  <tr><td>Participación en CodeAlong</td><td>Pregunta, propone y sigue el ritmo</td><td>Participa activamente</td><td>Asiste pero pasivo</td><td>Ausente/desconectado</td></tr>
+  <tr><td>Trabajo en equipo</td><td>Driver/navigator rotativo, explica al compañero</td><td>Colabora sin fricción</td><td>Aporta poco al equipo</td><td>No colabora</td></tr>
+  <tr><td>Autonomía en el reto</td><td>Resuelve solo, documenta dudas</td><td>Resuelve con ayuda puntual</td><td>Necesita guía constante</td><td>No lo intenta</td></tr>
+  <tr><td>Mejora continua</td><td>Aplica retroalimentación en la siguiente evidencia</td><td>Corrige lo señalado</td><td>Entregas casi iguales</td><td>No incorpora feedback</td></tr>
+</table>
+
+<h3>Bitácora XP y niveles</h3>
+<table>
+  <tr><th>Nivel</th><th>XP acumulados</th><th>Beneficio</th></tr>
+  <tr><td>Novato</td><td>0–299</td><td>Acceso a tutorías de refuerzo</td></tr>
+  <tr><td>Desarrollador Jr.</td><td>300–799</td><td>Examen con material abierto</td></tr>
+  <tr><td>Desarrollador</td><td>800–1399</td><td>Certificado con mención "Desarrollador Full-Stack"</td></tr>
+  <tr><td>Tech Lead</td><td>1400+</td><td>Invitado a mentorizar al siguiente grupo + badge en LinkedIn</td></tr>
+</table>
+<p><b>Total posible: 1450 XP</b> (E1=100, E2=150, E3=150, E4=150, E5=200, E6=200, E7=200, E8=300).</p>
+
+<!-- ======================= DINAMICAS ======================= -->
+<h2>4. Dinámicas maestro-alumno (cómo se corre cada sesión)</h2>
+<table>
+  <tr><th style="width:22%">Momento</th><th>Dinámica</th><th>Regla de oro</th></tr>
+  <tr><td>Inicio (10 min)</td><td>Quiz relámpago / "rompe algo en vivo" / lluvia de ideas. Se proyecta el reto del sitio real como motivación.</td><td>Todos los alumnos en el mismo commit inicial del repo del curso.</td></tr>
+  <tr><td>CodeAlong (30–45 min)</td><td>El maestro programa en vivo proyectado; los alumnos replican en paralelo. Se detiene cada ~10 min para verificar.</td><td>Nadie avanza si el maestro no confirma "checkpoint" (todos en verde).</td></tr>
+  <tr><td>Práctica (30–45 min)</td><td><b>Driver/Navigator:</b> parejas o tríos rotan cada 10 min. En tríos hay roles: constructor, revisor de rúbrica, documentador.</td><td>El revisor usa la rúbrica como checklist en vivo; el documentador toma notas para el README.</td></tr>
+  <tr><td>Reto (10–20 min)</td><td>Desafío individual con tiempo límite, entrega al Drive/repo del curso. Los 3 mejores pasan a "Reto Bonus".</td><td>El reto nunca repite lo del CodeAlong; siempre es una variación.</td></tr>
+  <tr><td>Cierre (10–15 min)</td><td>"2 estrellas y 1 deseo": cada alumno dice qué aprendió y qué quiere mejorar. Se registra XP y se entrega la minuta de la evidencia.</td><td>La evidencia se entrega en la misma sesión o 48 h después (según rúbrica).</td></tr>
+</table>
+
+<div class="box warn">
+  <b>Reglas de clase (leer el primer día):</b><br>
+  1. El código se trabaja en el repo del curso; nada de "me lo mandaron por WhatsApp".<br>
+  2. Copiar está permitido solo como punto de partida: la rúbrica penaliza entregas idénticas a las del maestro.<br>
+  3. El error es información: cada bug resuelto suma XP extra (5 pts c/u, máx. 20/sesión).<br>
+  4. Asistencia mínima 80%; las sesiones son presenciales con equipo propio (o en el aula de cómputo).
+</div>
+
+<h2>5. Mapeo con la aplicación real (para el docente)</h2>
+<table>
+  <tr><th>Sesión</th><th>Pieza del sitio real que se replica</th><th>Archivo de referencia</th></tr>
+  <tr><td>S1</td><td>Estructura HTML y estilos de la landing</td><td><code>src/routes/index.tsx</code>, <code>src/styles.css</code></td></tr>
+  <tr><td>S2</td><td>Lógica del chat y del resumen de consulta</td><td><code>src/lib/resumen.ts</code></td></tr>
+  <tr><td>S3</td><td>Stack, scripts, repo, config</td><td><code>package.json</code>, <code>vite.config.ts</code>, <code>tsconfig.json</code></td></tr>
+  <tr><td>S4</td><td>Tipos del dominio y de mensajes</td><td><code>src/lib/asesorias-info.ts</code>, <code>src/lib/orientador.functions.ts</code></td></tr>
+  <tr><td>S5</td><td>Componentes React y estado del chat</td><td><code>src/components/orientador/Orientador.tsx</code></td></tr>
+  <tr><td>S6</td><td>Sistema de diseño, accesibilidad, responsive</td><td><code>src/components/ui/*</code>, Tailwind config</td></tr>
+  <tr><td>S7</td><td>Ruta API del orientador y validación de mensajes</td><td><code>src/routes/api/orientador.ts</code>, <code>src/lib/orientador.server.ts</code></td></tr>
+  <tr><td>S8</td><td>Prompt con "datos confirmados", pruebas y despliegue</td><td><code>src/lib/orientador.server.ts</code>, <code>src/lib/whatsapp.ts</code>, <code>src/lib/*.test.ts</code></td></tr>
+</table>
+
+<div class="footer-note">
+  Secuencia Didáctica · UT Ciudad Juárez · 3er Cuatrimestre · Desarrollo Web con IA —
+  Documento imprimible (Ctrl/Cmd + P). Las marcas { } se llenan por grupo.
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@source "../node_modules/streamdown/dist/*.js";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --color-scar: var(--scar);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Palette drawn from the lion: deep mane browns, amber eye, scar red. */
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.15 0.015 50);
+  --foreground: oklch(0.94 0.02 75);
+  --card: oklch(0.19 0.02 50);
+  --card-foreground: oklch(0.94 0.02 75);
+  --popover: oklch(0.19 0.02 50);
+  --popover-foreground: oklch(0.94 0.02 75);
+  --primary: oklch(0.76 0.14 70);
+  --primary-foreground: oklch(0.16 0.02 50);
+  --secondary: oklch(0.24 0.025 50);
+  --secondary-foreground: oklch(0.94 0.02 75);
+  --muted: oklch(0.22 0.02 50);
+  --muted-foreground: oklch(0.7 0.03 70);
+  --accent: oklch(0.32 0.05 50);
+  --accent-foreground: oklch(0.94 0.02 75);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.94 0.02 75 / 12%);
+  --input: oklch(0.94 0.02 75 / 15%);
+  --ring: oklch(0.76 0.14 70);
+  --whatsapp: oklch(0.72 0.17 150);
+  --whatsapp-foreground: oklch(0.14 0.02 150);
+  --scar: oklch(0.5 0.17 25);
+  --chart-1: oklch(0.76 0.14 70);
+  --chart-2: oklch(0.5 0.17 25);
+  --chart-3: oklch(0.6 0.08 55);
+  --chart-4: oklch(0.85 0.08 80);
+  --chart-5: oklch(0.4 0.05 45);
+  --sidebar: oklch(0.19 0.02 50);
+  --sidebar-foreground: oklch(0.94 0.02 75);
+  --sidebar-primary: oklch(0.76 0.14 70);
+  --sidebar-primary-foreground: oklch(0.16 0.02 50);
+  --sidebar-accent: oklch(0.24 0.025 50);
+  --sidebar-accent-foreground: oklch(0.94 0.02 75);
+  --sidebar-border: oklch(0.94 0.02 75 / 12%);
+  --sidebar-ring: oklch(0.76 0.14 70);
+
+  --gradient-hero: linear-gradient(
+    90deg,
+    var(--background) 0%,
+    color-mix(in oklab, var(--background) 85%, transparent) 40%,
+    transparent 75%
+  );
+  --gradient-fade-up: linear-gradient(0deg, var(--background) 0%, transparent 100%);
+  --gradient-amber: linear-gradient(135deg, var(--primary), oklch(0.62 0.15 50));
+  --shadow-amber: 0 20px 50px -20px color-mix(in oklab, var(--primary) 55%, transparent);
+  --shadow-whatsapp: 0 14px 40px -12px color-mix(in oklab, var(--whatsapp) 70%, transparent);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
+
+@utility bg-hero-fade {
+  background-image: var(--gradient-hero);
+}
+
+@utility bg-fade-up {
+  background-image: var(--gradient-fade-up);
+}
+
+@utility text-amber-gradient {
+  background-image: var(--gradient-amber);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 9999px;
+  padding: 0.95rem 1.75rem;
+  font-weight: 700;
+  background-color: var(--whatsapp);
+  color: var(--whatsapp-foreground);
+  box-shadow: var(--shadow-whatsapp);
+  transition:
+    transform 200ms ease,
+    filter 200ms ease;
+  &:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+  }
+}
+
+@utility btn-ghost-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.95rem 1.75rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  transition:
+    border-color 200ms ease,
+    color 200ms ease;
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+@utility scar-line {
+  height: 2px;
+  width: 3.5rem;
+  background: linear-gradient(90deg, var(--scar), transparent);
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--whatsapp) 60%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 18px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 2.2s ease-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
